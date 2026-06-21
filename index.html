@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry 🥺</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart-float {
+            position: absolute;
+            animation: floatUp 4s ease-in-out infinite;
+            opacity: 0.6;
+            font-size: 24px;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .emoji-big {
+            font-size: 80px;
+            display: block;
+            margin: 10px 0;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .message {
+            font-size: 1.2rem;
+            color: #666;
+            margin: 20px 0;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .counter {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 20px 0;
+        }
+
+        .btn-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .forgive-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        .forgive-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .forgive-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .nope-btn {
+            position: absolute;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: bold;
+            white-space: nowrap;
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .forgiven {
+            animation: celebrate 0.5s ease-out;
+        }
+
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .sparkle {
+            position: absolute;
+            animation: sparkleAnim 1s ease-out forwards;
+            font-size: 30px;
+        }
+
+        @keyframes sparkleAnim {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--dx), var(--dy)) scale(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-bg" id="heartsBg"></div>
+    <div class="sparkles" id="sparklesContainer"></div>
+
+    <div class="container" id="mainContainer">
+        <span class="emoji-big" id="mainEmoji">🥺</span>
+        <h1 id="title">Will You Forgive Me?</h1>
+        <div class="message" id="message">I know I messed up... Please forgive me? 💔</div>
+        <div class="counter" id="counter">0</div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div style="position: relative; display: inline-block; min-height: 60px;">
+            <button class="forgive-btn" id="forgiveBtn" onclick="askForgiveness()">
+                Click to Ask for Forgiveness 🙏
+            </button>
+            <button class="nope-btn hidden" id="nopeBtn" onclick="runAway()">
+                Nope! 😤
+            </button>
+        </div>
+        <p style="margin-top: 20px; color: #999; font-size: 0.9rem;">
+            Keep clicking until she forgives you! 😅
+        </p>
+    </div>
+
+    <script>
+        let clickCount = 0;
+        const requiredClicks = 15; // Number of clicks needed for forgiveness
+        const messages = [
+            "Please? 🥺",
+            "I'll buy you food... 🍕",
+            "And flowers! 💐",
+            "I'll do the dishes for a month! 🧼",
+            "And give you unlimited massages! 💆‍♀️",
+            "I'll watch your favorite show with you! 📺",
+            "Even the ones I don't like! 😅",
+            "I'll let you have the last slice of pizza! 🍕",
+            "And control the remote forever! 🎮",
+            "I'll sing for you! (badly) 🎤",
+            "I'll do a silly dance! 💃",
+            "I'll buy you chocolate! 🍫",
+            "The expensive kind! 💎",
+            "Almost there... please? 🥺",
+            "LAST ONE I PROMISE! 😭"
+        ];
+
+        const nopeMessages = [
+            "You can't escape! 😈",
+            "Nice try! 😏",
+            "I'm persistent! 💪",
+            "You're stuck with me! 💕",
+            "Running won't help! 🏃‍♂️",
+            "I'll find you! 🔍",
+            "Forever and ever! ♾️",
+        ];
+
+        function createFloatingHearts() {
+            const heartsBg = document.getElementById('heartsBg');
+            const hearts = ['❤️', '💕', '💖', '💗', '💝', '💘', '🥺', '😍'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('span');
+                heart.className = 'heart-float';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 4 + 's';
+                heart.style.animationDuration = (3 + Math.random() * 4) + 's';
+                heart.style.fontSize = (16 + Math.random() * 30) + 'px';
+                heartsBg.appendChild(heart);
+            }
+        }
+
+        function createSparkles(x, y) {
+            const sparklesContainer = document.getElementById('sparklesContainer');
+            const emojis = ['✨', '💖', '💕', '🎉', '💝', '🌟', '💗'];
+            
+            for (let i = 0; i < 15; i++) {
+                const sparkle = document.createElement('span');
+                sparkle.className = 'sparkle';
+                sparkle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                sparkle.style.left = x + 'px';
+                sparkle.style.top = y + 'px';
+                sparkle.style.setProperty('--dx', (Math.random() - 0.5) * 300 + 'px');
+                sparkle.style.setProperty('--dy', (Math.random() - 0.5) * 300 + 'px');
+                sparklesContainer.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1000);
+            }
+        }
+
+        function moveNopeButton() {
+            const nopeBtn = document.getElementById('nopeBtn');
+            const container = document.querySelector('.container');
+            const containerRect = container.getBoundingClientRect();
+            
+            // Random position within the container
+            const maxX = containerRect.width - nopeBtn.offsetWidth - 40;
+            const maxY = containerRect.height - nopeBtn.offsetHeight - 40;
+            
+            const randomX = Math.random() * maxX - containerRect.width/2 + nopeBtn.offsetWidth/2;
+            const randomY = Math.random() * maxY - containerRect.height/2 + nopeBtn.offsetHeight/2;
+            
+            nopeBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        function runAway() {
+            const nopeBtn = document.getElementById('nopeBtn');
+            moveNopeButton();
+            
+            // Change nope button text
+            const randomNope = nopeMessages[Math.floor(Math.random() * nopeMessages.length)];
+            nopeBtn.textContent = randomNope;
+            
+            // Add click to forgive button area
+            clickCount = Math.max(0, clickCount - 2);
+            updateUI();
+            
+            // Shake the container
+            const container = document.getElementById('mainContainer');
+            container.style.animation = 'none';
+            container.offsetHeight;
+            container.style.animation = 'shake 0.5s ease-out';
+        }
+
+        function askForgiveness() {
+            clickCount++;
+            
+            if (clickCount >= requiredClicks) {
+                forgiveMe();
+                return;
+            }
+            
+            // Update UI
+            updateUI();
+            
+            // Show nope button after 3 clicks
+            if (clickCount >= 3 && document.getElementById('nopeBtn').classList.contains('hidden')) {
+                const nopeBtn = document.getElementById('nopeBtn');
+                nopeBtn.classList.remove('hidden');
+                moveNopeButton();
+            }
+            
+            // Move nope button occasionally
+            if (clickCount >= 3 && Math.random() < 0.3) {
+                moveNopeButton();
+            }
+            
+            // Create sparkles on click
+            const forgiveBtn = document.getElementById('forgiveBtn');
+            const rect = forgiveBtn.getBoundingClientRect();
+            createSparkles(rect.left + rect.width/2, rect.top + rect.height/2);
+        }
+
+        function updateUI() {
+            const counter = document.getElementById('counter');
+            const message = document.getElementById('message');
+            const progressFill = document.getElementById('progressFill');
+            const mainEmoji = document.getElementById('mainEmoji');
+            const title = document.getElementById('title');
+            const forgiveBtn = document.getElementById('forgiveBtn');
+            
+            counter.textContent = clickCount;
+            
+            const progress = Math.min((clickCount / requiredClicks) * 100, 100);
+            progressFill.style.width = progress + '%';
+            
+            if (clickCount > 0 && clickCount <= messages.length) {
+                message.textContent = messages[clickCount - 1];
+            } else if (clickCount > messages.length) {
+                message.textContent = "I'll do ANYTHING! 😭🙏";
+            }
+            
+            // Update emoji based on progress
+            if (clickCount < 5) {
+                mainEmoji.textContent = '🥺';
+            } else if (clickCount < 10) {
+                mainEmoji.textContent = '😢';
+            } else if (clickCount < 14) {
+                mainEmoji.textContent = '😭';
+            } else {
+                mainEmoji.textContent = '🙏';
+            }
+            
+            // Update button text
+            if (clickCount < 5) {
+                forgiveBtn.textContent = 'Click to Ask for Forgiveness 🙏';
+            } else if (clickCount < 10) {
+                forgiveBtn.textContent = 'PLEASE FORGIVE ME! 🥺';
+            } else if (clickCount < 14) {
+                forgiveBtn.textContent = 'ALMOST FORGIVEN? 😭';
+            }
+        }
+
+        function forgiveMe() {
+            const container = document.getElementById('mainContainer');
+            const message = document.getElementById('message');
+            const counter = document.getElementById('counter');
+            const progressFill = document.getElementById('progressFill');
+            const mainEmoji = document.getElementById('mainEmoji');
+            const title = document.getElementById('title');
+            const forgiveBtn = document.getElementById('forgiveBtn');
+            const nopeBtn = document.getElementById('nopeBtn');
+            
+            // Final UI update
+            counter.textContent = '❤️';
+            progressFill.style.width = '100%';
+            mainEmoji.textContent = '😍';
+            title.textContent = 'YAY! FORGIVEN!';
+            message.textContent = 'I promise to be the best boyfriend ever! I love you! 💖';
+            forgiveBtn.textContent = 'THANK YOU! 💕';
+            forgiveBtn.onclick = null;
+            forgiveBtn.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+            forgiveBtn.style.cursor = 'default';
+            
+            if (nopeBtn) {
+                nopeBtn.classList.add('hidden');
+            }
+            
+            // Celebration effects
+            container.classList.add('forgiven');
+            
+            // Massive sparkle explosion
+            const rect = container.getBoundingClientRect();
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createSparkles(
+                        rect.left + Math.random() * rect.width,
+                        rect.top + Math.random() * rect.height
+                    );
+                }, i * 200);
+            }
+            
+            // Confetti-like effect
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#ff9ff3', '#54a0ff'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.cssText = `
+                        position: fixed;
+                        left: ${Math.random() * 100}%;
+                        top: -10px;
+                        width: 10px;
+                        height: 10px;
+                        background: ${colors[Math.floor(Math.random() * colors.length)]};
+                        pointer-events: none;
+                        z-index: 100;
+                        animation: confettiFall ${2 + Math.random() * 3}s linear forwards;
+                        border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+                    `;
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 50);
+            }
+            
+            // Add confetti animation
+            if (!document.getElementById('confettiStyle')) {
+                const style = document.createElement('style');
+                style.id = 'confettiStyle';
+                style.textContent = `
+                    @keyframes confettiFall {
+                        to {
+                            transform: translateY(100vh) rotate(720deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // Disable further interactions after 2 seconds
+            setTimeout(() => {
+                forgiveBtn.style.pointerEvents = 'none';
+            }, 2000);
+        }
+
+        // Initialize
+        createFloatingHearts();
+        
+        // Add keyboard shortcut for fun
+        document.addEventListener('keydown', (e) => {
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                if (clickCount < requiredClicks) {
+                    askForgiveness();
+                }
+            }
+        });
+
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+                20%, 40%, 60%, 80% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
