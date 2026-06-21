@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I'm Sorry 🥺</title>
+    <title>With Love, Amit 💕</title>
     <style>
         * {
             margin: 0;
@@ -12,17 +12,18 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 30%, #e1bee7 60%, #d1c4e9 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
         }
 
-        .hearts-bg {
+        /* Floating petals background */
+        .petals-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -32,47 +33,70 @@
             z-index: 0;
         }
 
-        .heart-float {
+        .petal {
             position: absolute;
-            animation: floatUp 4s ease-in-out infinite;
-            opacity: 0.6;
-            font-size: 24px;
+            animation: floatPetal 8s ease-in-out infinite;
+            opacity: 0.7;
         }
 
-        @keyframes floatUp {
+        @keyframes floatPetal {
             0% {
-                transform: translateY(100vh) rotate(0deg);
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
                 opacity: 0;
             }
             10% {
-                opacity: 0.6;
+                opacity: 0.7;
             }
             90% {
-                opacity: 0.6;
+                opacity: 0.7;
             }
             100% {
-                transform: translateY(-10vh) rotate(360deg);
+                transform: translateY(110vh) translateX(100px) rotate(720deg);
                 opacity: 0;
             }
         }
 
-        .container {
-            background: white;
-            border-radius: 24px;
-            padding: 40px 30px;
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
-            animation: slideIn 0.5s ease-out;
+        /* Twinkling stars */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        @keyframes slideIn {
+        .star {
+            position: absolute;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* Main card */
+        .main-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 50px 40px;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(233, 30, 99, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 1;
+            animation: gentleAppear 1s ease-out;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes gentleAppear {
             from {
                 opacity: 0;
-                transform: translateY(50px) scale(0.9);
+                transform: translateY(30px) scale(0.95);
             }
             to {
                 opacity: 1;
@@ -80,120 +104,235 @@
             }
         }
 
-        h1 {
-            font-size: 2rem;
-            color: #333;
-            margin-bottom: 10px;
+        .card-decoration {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #a18cd1);
+            border-radius: 32px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: rotateGradient 10s linear infinite;
+            background-size: 300% 300%;
         }
 
-        .emoji-big {
+        @keyframes rotateGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header-emoji {
             font-size: 80px;
             display: block;
-            margin: 10px 0;
-            animation: bounce 1s infinite;
+            margin-bottom: 15px;
+            animation: gentleBounce 3s ease-in-out infinite;
         }
 
-        @keyframes bounce {
+        @keyframes gentleBounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-15px); }
         }
 
-        .message {
-            font-size: 1.2rem;
-            color: #666;
-            margin: 20px 0;
-            min-height: 80px;
+        .date-display {
+            font-size: 0.9rem;
+            color: #e91e63;
+            margin-bottom: 10px;
+            font-style: italic;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #d81b60;
+            margin-bottom: 5px;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #ad1457;
+            margin-bottom: 30px;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+            border-radius: 20px;
+            padding: 35px 30px;
+            margin: 25px 0;
+            position: relative;
+            border: 1px solid rgba(233, 30, 99, 0.1);
+            min-height: 150px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
         }
 
-        .counter {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #764ba2;
-            margin: 20px 0;
-        }
-
-        .btn-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .forgive-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 18px 40px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            letter-spacing: 1px;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-            position: relative;
-            z-index: 2;
-        }
-
-        .forgive-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
-        }
-
-        .forgive-btn:active {
-            transform: translateY(-1px);
-        }
-
-        .nope-btn {
+        .quote-mark {
             position: absolute;
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-weight: bold;
-            white-space: nowrap;
-            z-index: 1;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            font-size: 60px;
+            color: #e91e63;
+            opacity: 0.2;
+            font-family: Georgia, serif;
+            line-height: 1;
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 10px;
-            margin: 20px 0;
+        .quote-mark.left {
+            top: 10px;
+            left: 20px;
+        }
+
+        .quote-mark.right {
+            bottom: 10px;
+            right: 20px;
+        }
+
+        .quote-text {
+            font-size: 1.4rem;
+            color: #4a154b;
+            line-height: 1.6;
+            font-style: italic;
+            transition: all 0.5s ease;
+            padding: 10px 20px;
+        }
+
+        .quote-fade {
+            animation: quoteFadeIn 0.8s ease-out;
+        }
+
+        @keyframes quoteFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        .love-btn {
+            background: linear-gradient(135deg, #e91e63, #c2185b);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: Georgia, serif;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.3);
+            position: relative;
             overflow: hidden;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 10px;
-            transition: width 0.3s ease;
-            width: 0%;
+        .love-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(233, 30, 99, 0.4);
+            background: linear-gradient(135deg, #f06292, #e91e63);
         }
 
-        .forgiven {
-            animation: celebrate 0.5s ease-out;
+        .love-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.3);
         }
 
-        @keyframes celebrate {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        .love-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
         }
 
-        .hidden {
-            display: none;
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
         }
 
-        .sparkles {
+        .secondary-btn {
+            background: white;
+            color: #e91e63;
+            border: 2px solid #e91e63;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: Georgia, serif;
+            letter-spacing: 1px;
+        }
+
+        .secondary-btn:hover {
+            background: #fce4ec;
+            transform: translateY(-3px);
+        }
+
+        .love-counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            font-size: 1rem;
+            color: #ad1457;
+        }
+
+        .heart-icon {
+            color: #e91e63;
+            animation: heartBeat 1s ease-in-out infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .signature {
+            margin-top: 30px;
+            font-family: 'Brush Script MT', 'Georgia', cursive;
+            font-size: 1.8rem;
+            color: #c2185b;
+            font-style: italic;
+        }
+
+        .signature-line {
+            width: 150px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e91e63, transparent);
+            margin: 5px auto 10px;
+        }
+
+        .love-note {
+            font-size: 0.85rem;
+            color: #ad1457;
+            opacity: 0.6;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        /* Heart explosion effect */
+        .hearts-explosion {
             position: fixed;
             top: 0;
             left: 0;
@@ -203,325 +342,440 @@
             z-index: 10;
         }
 
-        .sparkle {
+        .exploding-heart {
             position: absolute;
-            animation: sparkleAnim 1s ease-out forwards;
+            animation: heartExplode 1.5s ease-out forwards;
             font-size: 30px;
         }
 
-        @keyframes sparkleAnim {
+        @keyframes heartExplode {
             0% {
                 opacity: 1;
-                transform: translate(0, 0) scale(1);
+                transform: translate(0, 0) scale(1) rotate(0deg);
             }
             100% {
                 opacity: 0;
-                transform: translate(var(--dx), var(--dy)) scale(0);
+                transform: translate(var(--dx), var(--dy)) scale(0) rotate(var(--dr));
+            }
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: white;
+            color: #c2185b;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3);
+            z-index: 20;
+            font-family: Georgia, serif;
+            font-style: italic;
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 600px) {
+            .main-card {
+                padding: 30px 25px;
+                border-radius: 25px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .quote-text {
+                font-size: 1.2rem;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .love-btn, .secondary-btn {
+                width: 100%;
+                max-width: 300px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="hearts-bg" id="heartsBg"></div>
-    <div class="sparkles" id="sparklesContainer"></div>
+    <!-- Background petals -->
+    <div class="petals-container" id="petalsContainer"></div>
+    
+    <!-- Twinkling stars -->
+    <div class="stars-container" id="starsContainer"></div>
+    
+    <!-- Hearts explosion -->
+    <div class="hearts-explosion" id="heartsExplosion"></div>
 
-    <div class="container" id="mainContainer">
-        <span class="emoji-big" id="mainEmoji">🥺</span>
-        <h1 id="title">Will You Forgive Me?</h1>
-        <div class="message" id="message">I know I messed up... Please forgive me? 💔</div>
-        <div class="counter" id="counter">0</div>
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
+    <!-- Main Card -->
+    <div class="main-card" id="mainCard">
+        <div class="card-decoration"></div>
+        
+        <span class="header-emoji" id="headerEmoji">💝</span>
+        
+        <div class="date-display" id="dateDisplay"></div>
+        
+        <h1>For My Love</h1>
+        <p class="subtitle">A little something to make you smile</p>
+        
+        <div class="quote-box" id="quoteBox">
+            <span class="quote-mark left">"</span>
+            <p class="quote-text quote-fade" id="quoteText">
+                Click the button for your daily dose of love!
+            </p>
+            <span class="quote-mark right">"</span>
         </div>
-        <div style="position: relative; display: inline-block; min-height: 60px;">
-            <button class="forgive-btn" id="forgiveBtn" onclick="askForgiveness()">
-                Click to Ask for Forgiveness 🙏
+        
+        <div class="buttons-container">
+            <button class="love-btn" id="newQuoteBtn" onclick="showNewQuote()">
+                💌 New Love Note
             </button>
-            <button class="nope-btn hidden" id="nopeBtn" onclick="runAway()">
-                Nope! 😤
+            <button class="secondary-btn" id="surpriseBtn" onclick="showSurprise()">
+                ✨ Surprise Me
             </button>
         </div>
-        <p style="margin-top: 20px; color: #999; font-size: 0.9rem;">
-            Keep clicking until she forgives you! 😅
-        </p>
+        
+        <div class="love-counter">
+            <span>You've been loved</span>
+            <span class="heart-icon">❤️</span>
+            <span id="viewCount">0</span>
+            <span>times today</span>
+        </div>
+        
+        <div class="signature-line"></div>
+        <div class="signature">With Love, Amit</div>
+        <p class="love-note">Come back tomorrow for more! 💕</p>
     </div>
 
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
     <script>
-        let clickCount = 0;
-        const requiredClicks = 15; // Number of clicks needed for forgiveness
-        const messages = [
-            "Please? 🥺",
-            "I'll buy you food... 🍕",
-            "And flowers! 💐",
-            "I'll do the dishes for a month! 🧼",
-            "And give you unlimited massages! 💆‍♀️",
-            "I'll watch your favorite show with you! 📺",
-            "Even the ones I don't like! 😅",
-            "I'll let you have the last slice of pizza! 🍕",
-            "And control the remote forever! 🎮",
-            "I'll sing for you! (badly) 🎤",
-            "I'll do a silly dance! 💃",
-            "I'll buy you chocolate! 🍫",
-            "The expensive kind! 💎",
-            "Almost there... please? 🥺",
-            "LAST ONE I PROMISE! 😭"
+        // Love quotes database
+        const loveQuotes = [
+            "Every day with you feels like a beautiful dream I never want to wake up from. 💭",
+            "You're not just my girlfriend, you're my best friend, my soulmate, and my everything. 💑",
+            "I fall in love with you all over again, every single day. 💕",
+            "Your smile is the reason I believe in magic. ✨",
+            "If I had a flower for every time I thought of you, I'd have a garden to walk in forever. 🌸",
+            "You make my world brighter just by being in it. ☀️",
+            "I never knew what love was until I met you. Now I can't imagine life without it. 💖",
+            "You're the missing piece I didn't know I was searching for. 🧩",
+            "My favorite place in the world is next to you. 🌍",
+            "You're the peanut butter to my jelly, the sunshine to my day. 🥜☀️",
+            "Loving you is the easiest and best thing I've ever done. 💝",
+            "You make ordinary moments extraordinary just by being there. ✨",
+            "I'd choose you in every lifetime, in every universe. 🌌",
+            "Your laugh is my favorite sound in the entire world. 😊",
+            "Home isn't a place anymore, it's wherever you are. 🏡",
+            "You're the reason I believe in fairy tales and happily ever afters. 📖",
+            "Every love song suddenly makes sense because of you. 🎵",
+            "I didn't know my heart could hold this much love until I met you. 💗",
+            "You're more beautiful than any sunset, more precious than any gem. 💎",
+            "Meeting you was fate, loving you was choice, but staying with you is beyond my control. 💫",
+            "You're the best part of my every day. 🌅",
+            "I love you more than coffee, and that's saying a lot! ☕💕",
+            "You're my favorite notification, my favorite hello, and my favorite goodbye. 📱",
+            "With you, even the bad days become good memories. 🌈",
+            "I didn't just fall in love with you, I walked into love with you, my eyes wide open. 👀❤️",
+            "You're the calm to my chaos, the peace to my storm. 🌊",
+            "Every moment with you is a moment I treasure. 💎",
+            "I love you not because of who you are, but because of who I am when I'm with you. 🌟",
+            "You're the first thing I think about when I wake up and the last thing before I sleep. 🌙",
+            "My heart is and always will be yours. 🔐❤️",
+            "You're my today and all of my tomorrows. 📅💕",
+            "I'm much more 'me' when I'm with you. 🦋",
+            "You're the one I want to annoy for the rest of my life. 😜💕",
+            "Even on your worst days, you're still the best thing that's ever happened to me. 🌧️🌈",
+            "I love you more than pizza... and I really love pizza! 🍕❤️",
+            "You're my sunshine on a rainy day. ☔☀️",
+            "Being with you makes me feel like the luckiest person alive. 🍀",
+            "Your happiness is my happiness, your pain is my pain. We're in this together. 🤝",
+            "I promise to always be your biggest supporter and your loudest cheerleader. 📣",
+            "You're the reason I look forward to tomorrow. 🌄",
+            "Thank you for being you, and thank you for being mine. 🙏💕",
+            "I could spend forever in your arms and it still wouldn't be enough. 🤗",
+            "You're proof that God answers prayers. 🙏✨",
+            "I love the way you make me feel - safe, loved, and truly seen. 👁️❤️",
+            "You're my greatest adventure and my safest harbor. ⚓⛵",
+            "If love is a language, you're my favorite word. 📝",
+            "You make my heart do a happy dance every time I see you. 💃🕺",
+            "I'm addicted to your smile, hooked on your love. 🎣",
+            "You're the one I want to grow old and gray with. 👴👵",
+            "I love you more today than yesterday, but not as much as tomorrow. ⏰💕"
         ];
 
-        const nopeMessages = [
-            "You can't escape! 😈",
-            "Nice try! 😏",
-            "I'm persistent! 💪",
-            "You're stuck with me! 💕",
-            "Running won't help! 🏃‍♂️",
-            "I'll find you! 🔍",
-            "Forever and ever! ♾️",
+        // Surprise quotes (extra romantic/poetic)
+        const surpriseQuotes = [
+            "If I could give you one thing in life, I'd give you the ability to see yourself through my eyes. Only then would you realize how special you are to me. 👁️✨",
+            "I want to be the reason you look down at your phone and smile. Then walk into a pole. 📱😊",
+            "You're the 'she' in my 'we', the 'you' in my 'us', and the 'love' in my 'life'. 💑",
+            "I promise to love you even when you're hangry, even when you steal the blankets, and even when you're right (which is always). 🛌😤💕",
+            "Darling, you're the most beautiful chapter in the story of my life. And I never want this book to end. 📚💖",
+            "They say home is where the heart is. My heart is with you, so I guess I'm home. 🏠❤️",
+            "If I wrote a book about my love for you, it would be the longest book ever written, with no ending. 📖♾️",
+            "You're like a beautiful sunset - I could stare at you for hours and still want more. 🌅",
+            "I fell in love with you accidentally, but staying in love with you is completely on purpose. 💘",
+            "You're the one I want to share my fries with, and that's true love! 🍟❤️",
         ];
 
-        function createFloatingHearts() {
-            const heartsBg = document.getElementById('heartsBg');
-            const hearts = ['❤️', '💕', '💖', '💗', '💝', '💘', '🥺', '😍'];
-            
-            for (let i = 0; i < 20; i++) {
-                const heart = document.createElement('span');
-                heart.className = 'heart-float';
-                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDelay = Math.random() * 4 + 's';
-                heart.style.animationDuration = (3 + Math.random() * 4) + 's';
-                heart.style.fontSize = (16 + Math.random() * 30) + 'px';
-                heartsBg.appendChild(heart);
-            }
+        // Header emojis to cycle through
+        const headerEmojis = ['💝', '💖', '💗', '💕', '💘', '💓', '💞', '🫶', '💌', '🌸', '🦋', '✨', '🌹', '💐'];
+        
+        // Track views
+        let viewCount = 0;
+        let lastQuoteIndex = -1;
+        
+        // Get today's date for daily tracking
+        function getTodayKey() {
+            const today = new Date();
+            return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
         }
-
-        function createSparkles(x, y) {
-            const sparklesContainer = document.getElementById('sparklesContainer');
-            const emojis = ['✨', '💖', '💕', '🎉', '💝', '🌟', '💗'];
+        
+        // Initialize
+        function init() {
+            // Display date
+            updateDateDisplay();
             
-            for (let i = 0; i < 15; i++) {
-                const sparkle = document.createElement('span');
-                sparkle.className = 'sparkle';
-                sparkle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-                sparkle.style.left = x + 'px';
-                sparkle.style.top = y + 'px';
-                sparkle.style.setProperty('--dx', (Math.random() - 0.5) * 300 + 'px');
-                sparkle.style.setProperty('--dy', (Math.random() - 0.5) * 300 + 'px');
-                sparklesContainer.appendChild(sparkle);
+            // Load view count for today
+            const todayKey = getTodayKey();
+            const storedData = JSON.parse(localStorage.getItem('amitLoveData') || '{}');
+            
+            if (storedData.date === todayKey) {
+                viewCount = storedData.count || 0;
+                lastQuoteIndex = storedData.lastQuoteIndex ?? -1;
+            } else {
+                viewCount = 0;
+                lastQuoteIndex = -1;
+                localStorage.setItem('amitLoveData', JSON.stringify({
+                    date: todayKey,
+                    count: 0,
+                    lastQuoteIndex: -1
+                }));
+            }
+            
+            updateViewCount();
+            
+            // Show daily quote based on date
+            const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            const dailyIndex = dayOfYear % loveQuotes.length;
+            document.getElementById('quoteText').textContent = loveQuotes[dailyIndex];
+            lastQuoteIndex = dailyIndex;
+            
+            // Random header emoji
+            document.getElementById('headerEmoji').textContent = 
+                headerEmojis[Math.floor(Math.random() * headerEmojis.length)];
+            
+            // Create background elements
+            createPetals();
+            createStars();
+        }
+        
+        function updateDateDisplay() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateStr = new Date().toLocaleDateString('en-US', options);
+            document.getElementById('dateDisplay').textContent = `✦ ${dateStr} ✦`;
+        }
+        
+        function getRandomQuote(excludeIndex = -1) {
+            let index;
+            do {
+                index = Math.floor(Math.random() * loveQuotes.length);
+            } while (index === excludeIndex && loveQuotes.length > 1);
+            return { index, quote: loveQuotes[index] };
+        }
+        
+        function showNewQuote() {
+            const { index, quote } = getRandomQuote(lastQuoteIndex);
+            const quoteText = document.getElementById('quoteText');
+            const quoteBox = document.getElementById('quoteBox');
+            
+            // Fade out
+            quoteText.classList.remove('quote-fade');
+            void quoteText.offsetWidth; // Trigger reflow
+            
+            // Update text and fade in
+            quoteText.textContent = quote;
+            quoteText.classList.add('quote-fade');
+            
+            // Subtle background pulse
+            quoteBox.style.transform = 'scale(1.02)';
+            setTimeout(() => {
+                quoteBox.style.transform = 'scale(1)';
+            }, 200);
+            
+            // Update tracking
+            lastQuoteIndex = index;
+            viewCount++;
+            updateViewCount();
+            
+            // Show toast
+            showToast('New love note just for you! 💌');
+            
+            // Create heart burst at button
+            const btn = document.getElementById('newQuoteBtn');
+            const rect = btn.getBoundingClientRect();
+            createHeartBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+            
+            // Random header emoji
+            document.getElementById('headerEmoji').textContent = 
+                headerEmojis[Math.floor(Math.random() * headerEmojis.length)];
+        }
+        
+        function showSurprise() {
+            const surpriseQuote = surpriseQuotes[Math.floor(Math.random() * surpriseQuotes.length)];
+            const quoteText = document.getElementById('quoteText');
+            const quoteBox = document.getElementById('quoteBox');
+            
+            // Special animation for surprise
+            quoteText.classList.remove('quote-fade');
+            void quoteText.offsetWidth;
+            
+            quoteText.textContent = surpriseQuote;
+            quoteText.classList.add('quote-fade');
+            
+            // More dramatic background effect
+            quoteBox.style.transform = 'scale(1.05)';
+            quoteBox.style.background = 'linear-gradient(135deg, #f8bbd0, #e1bee7, #d1c4e9)';
+            setTimeout(() => {
+                quoteBox.style.transform = 'scale(1)';
+                quoteBox.style.background = 'linear-gradient(135deg, #fce4ec, #f3e5f5)';
+            }, 300);
+            
+            viewCount++;
+            updateViewCount();
+            
+            // Big heart burst
+            const btn = document.getElementById('surpriseBtn');
+            const rect = btn.getBoundingClientRect();
+            createHeartBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 15);
+            
+            // Change header emoji to something special
+            document.getElementById('headerEmoji').textContent = '💘';
+            
+            showToast('A special surprise, just because! ✨');
+        }
+        
+        function updateViewCount() {
+            document.getElementById('viewCount').textContent = viewCount;
+            
+            // Save to localStorage
+            const todayKey = getTodayKey();
+            localStorage.setItem('amitLoveData', JSON.stringify({
+                date: todayKey,
+                count: viewCount,
+                lastQuoteIndex: lastQuoteIndex
+            }));
+        }
+        
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        function createHeartBurst(x, y, count = 8) {
+            const container = document.getElementById('heartsExplosion');
+            const hearts = ['❤️', '💕', '💖', '💗', '💘', '💝', '💓', '✨', '💌', '🌸'];
+            
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('span');
+                heart.className = 'exploding-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = x + 'px';
+                heart.style.top = y + 'px';
+                heart.style.setProperty('--dx', (Math.random() - 0.5) * 250 + 'px');
+                heart.style.setProperty('--dy', (Math.random() - 0.5) * 250 - 50 + 'px');
+                heart.style.setProperty('--dr', (Math.random() - 0.5) * 720 + 'deg');
+                heart.style.animationDelay = Math.random() * 0.3 + 's';
+                heart.style.fontSize = (20 + Math.random() * 25) + 'px';
+                
+                container.appendChild(heart);
                 
                 setTimeout(() => {
-                    sparkle.remove();
-                }, 1000);
+                    heart.remove();
+                }, 1800);
             }
         }
-
-        function moveNopeButton() {
-            const nopeBtn = document.getElementById('nopeBtn');
-            const container = document.querySelector('.container');
-            const containerRect = container.getBoundingClientRect();
-            
-            // Random position within the container
-            const maxX = containerRect.width - nopeBtn.offsetWidth - 40;
-            const maxY = containerRect.height - nopeBtn.offsetHeight - 40;
-            
-            const randomX = Math.random() * maxX - containerRect.width/2 + nopeBtn.offsetWidth/2;
-            const randomY = Math.random() * maxY - containerRect.height/2 + nopeBtn.offsetHeight/2;
-            
-            nopeBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-        }
-
-        function runAway() {
-            const nopeBtn = document.getElementById('nopeBtn');
-            moveNopeButton();
-            
-            // Change nope button text
-            const randomNope = nopeMessages[Math.floor(Math.random() * nopeMessages.length)];
-            nopeBtn.textContent = randomNope;
-            
-            // Add click to forgive button area
-            clickCount = Math.max(0, clickCount - 2);
-            updateUI();
-            
-            // Shake the container
-            const container = document.getElementById('mainContainer');
-            container.style.animation = 'none';
-            container.offsetHeight;
-            container.style.animation = 'shake 0.5s ease-out';
-        }
-
-        function askForgiveness() {
-            clickCount++;
-            
-            if (clickCount >= requiredClicks) {
-                forgiveMe();
-                return;
-            }
-            
-            // Update UI
-            updateUI();
-            
-            // Show nope button after 3 clicks
-            if (clickCount >= 3 && document.getElementById('nopeBtn').classList.contains('hidden')) {
-                const nopeBtn = document.getElementById('nopeBtn');
-                nopeBtn.classList.remove('hidden');
-                moveNopeButton();
-            }
-            
-            // Move nope button occasionally
-            if (clickCount >= 3 && Math.random() < 0.3) {
-                moveNopeButton();
-            }
-            
-            // Create sparkles on click
-            const forgiveBtn = document.getElementById('forgiveBtn');
-            const rect = forgiveBtn.getBoundingClientRect();
-            createSparkles(rect.left + rect.width/2, rect.top + rect.height/2);
-        }
-
-        function updateUI() {
-            const counter = document.getElementById('counter');
-            const message = document.getElementById('message');
-            const progressFill = document.getElementById('progressFill');
-            const mainEmoji = document.getElementById('mainEmoji');
-            const title = document.getElementById('title');
-            const forgiveBtn = document.getElementById('forgiveBtn');
-            
-            counter.textContent = clickCount;
-            
-            const progress = Math.min((clickCount / requiredClicks) * 100, 100);
-            progressFill.style.width = progress + '%';
-            
-            if (clickCount > 0 && clickCount <= messages.length) {
-                message.textContent = messages[clickCount - 1];
-            } else if (clickCount > messages.length) {
-                message.textContent = "I'll do ANYTHING! 😭🙏";
-            }
-            
-            // Update emoji based on progress
-            if (clickCount < 5) {
-                mainEmoji.textContent = '🥺';
-            } else if (clickCount < 10) {
-                mainEmoji.textContent = '😢';
-            } else if (clickCount < 14) {
-                mainEmoji.textContent = '😭';
-            } else {
-                mainEmoji.textContent = '🙏';
-            }
-            
-            // Update button text
-            if (clickCount < 5) {
-                forgiveBtn.textContent = 'Click to Ask for Forgiveness 🙏';
-            } else if (clickCount < 10) {
-                forgiveBtn.textContent = 'PLEASE FORGIVE ME! 🥺';
-            } else if (clickCount < 14) {
-                forgiveBtn.textContent = 'ALMOST FORGIVEN? 😭';
-            }
-        }
-
-        function forgiveMe() {
-            const container = document.getElementById('mainContainer');
-            const message = document.getElementById('message');
-            const counter = document.getElementById('counter');
-            const progressFill = document.getElementById('progressFill');
-            const mainEmoji = document.getElementById('mainEmoji');
-            const title = document.getElementById('title');
-            const forgiveBtn = document.getElementById('forgiveBtn');
-            const nopeBtn = document.getElementById('nopeBtn');
-            
-            // Final UI update
-            counter.textContent = '❤️';
-            progressFill.style.width = '100%';
-            mainEmoji.textContent = '😍';
-            title.textContent = 'YAY! FORGIVEN!';
-            message.textContent = 'I promise to be the best boyfriend ever! I love you! 💖';
-            forgiveBtn.textContent = 'THANK YOU! 💕';
-            forgiveBtn.onclick = null;
-            forgiveBtn.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
-            forgiveBtn.style.cursor = 'default';
-            
-            if (nopeBtn) {
-                nopeBtn.classList.add('hidden');
-            }
-            
-            // Celebration effects
-            container.classList.add('forgiven');
-            
-            // Massive sparkle explosion
-            const rect = container.getBoundingClientRect();
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    createSparkles(
-                        rect.left + Math.random() * rect.width,
-                        rect.top + Math.random() * rect.height
-                    );
-                }, i * 200);
-            }
-            
-            // Confetti-like effect
-            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#ff9ff3', '#54a0ff'];
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => {
-                    const confetti = document.createElement('div');
-                    confetti.style.cssText = `
-                        position: fixed;
-                        left: ${Math.random() * 100}%;
-                        top: -10px;
-                        width: 10px;
-                        height: 10px;
-                        background: ${colors[Math.floor(Math.random() * colors.length)]};
-                        pointer-events: none;
-                        z-index: 100;
-                        animation: confettiFall ${2 + Math.random() * 3}s linear forwards;
-                        border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
-                    `;
-                    document.body.appendChild(confetti);
-                    
-                    setTimeout(() => confetti.remove(), 3000);
-                }, i * 50);
-            }
-            
-            // Add confetti animation
-            if (!document.getElementById('confettiStyle')) {
-                const style = document.createElement('style');
-                style.id = 'confettiStyle';
-                style.textContent = `
-                    @keyframes confettiFall {
-                        to {
-                            transform: translateY(100vh) rotate(720deg);
-                            opacity: 0;
-                        }
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-            
-            // Disable further interactions after 2 seconds
-            setTimeout(() => {
-                forgiveBtn.style.pointerEvents = 'none';
-            }, 2000);
-        }
-
-        // Initialize
-        createFloatingHearts();
         
-        // Add keyboard shortcut for fun
+        function createPetals() {
+            const container = document.getElementById('petalsContainer');
+            const petals = ['🌸', '💮', '🌺', '🏵️', '🌷', '🌼', '✿', '❁', '💐', '🌹'];
+            
+            for (let i = 0; i < 20; i++) {
+                const petal = document.createElement('span');
+                petal.className = 'petal';
+                petal.textContent = petals[Math.floor(Math.random() * petals.length)];
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.animationDelay = Math.random() * 8 + 's';
+                petal.style.animationDuration = (6 + Math.random() * 8) + 's';
+                petal.style.fontSize = (15 + Math.random() * 20) + 'px';
+                container.appendChild(petal);
+            }
+        }
+        
+        function createStars() {
+            const container = document.getElementById('starsContainer');
+            const stars = ['✨', '⭐', '💫', '🌟', '⚡'];
+            
+            for (let i = 0; i < 15; i++) {
+                const star = document.createElement('span');
+                star.className = 'star';
+                star.textContent = stars[Math.floor(Math.random() * stars.length)];
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                star.style.fontSize = (10 + Math.random() * 20) + 'px';
+                container.appendChild(star);
+            }
+        }
+        
+        // Keyboard shortcut
         document.addEventListener('keydown', (e) => {
             if (e.key === ' ' || e.key === 'Enter') {
                 e.preventDefault();
-                if (clickCount < requiredClicks) {
-                    askForgiveness();
-                }
+                showNewQuote();
             }
         });
-
-        // Add shake animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
-                20%, 40%, 60%, 80% { transform: translateX(10px); }
+        
+        // Handle window resize for responsive heart bursts
+        window.addEventListener('resize', () => {
+            // Recreate background elements on resize
+            document.getElementById('petalsContainer').innerHTML = '';
+            document.getElementById('starsContainer').innerHTML = '';
+            createPetals();
+            createStars();
+        });
+        
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', init);
+        
+        // Reset view count at midnight
+        setInterval(() => {
+            const todayKey = getTodayKey();
+            const storedData = JSON.parse(localStorage.getItem('amitLoveData') || '{}');
+            if (storedData.date !== todayKey) {
+                viewCount = 0;
+                lastQuoteIndex = -1;
+                updateViewCount();
+                updateDateDisplay();
             }
-        `;
-        document.head.appendChild(style);
+        }, 60000); // Check every minute
     </script>
 </body>
 </html>
